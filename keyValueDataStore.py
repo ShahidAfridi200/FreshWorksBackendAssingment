@@ -42,11 +42,11 @@ def startApp():
 
 
 # Create a key value pair
-def createKeyValuePair(key, value, ttl=1):
+def createKeyValuePair(key, value, ttl=''):
     if key in data:
         print("key already exists")
     else:
-        if(ttl != -1):
+        if(len(ttl) != 0):
             currentTimeInSec = int(round(time.time()))
             ttl = currentTimeInSec+int(ttl)
 
