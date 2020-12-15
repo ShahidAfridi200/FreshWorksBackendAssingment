@@ -24,7 +24,7 @@ def startApp():
             f3 = input("Please enter TimeToLive value in seconds or press enter for infinite TTL: ")
 
             if(len(f3)==0):
-                f3 = 1
+                f3 = -1
 
             createKeyValuePair(f1,f2,f3)
 
@@ -45,11 +45,11 @@ def startApp():
 
 
 # Create a key value pair
-def createKeyValuePair(key, value, ttl=1):
+def createKeyValuePair(key, value, ttl=-1):
     if key in data:
         print("key already exists")
     else:
-        if(ttl != 1):
+        if(ttl != -1):
             currentTimeInSec = int(round(time.time()))
             ttl = currentTimeInSec+int(ttl)
 
@@ -105,6 +105,3 @@ def addToFile(data):
         json.dump(data, f, indent=4)
 
 startApp()
-
-
-

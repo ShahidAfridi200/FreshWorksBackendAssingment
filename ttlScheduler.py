@@ -7,19 +7,25 @@ print("Scheduler Started")
 print("Enter file path or hit enter for default path for scheduling")
 path = input()
 
+if (len(path) != 0):
+    path = path + "/db.json"
+else:
+    path = "db.json"
+
 def removeExpiredKeys():
     print("Scheduler running!")
-    path = 'db.json'
     if os.path.exists(path):
         loadFile = open(path)
         data = json.load(loadFile)
         l = []
         for v in data:
-            currentTimeInSec = int(round(time.time()))
-            isExpired = currentTimeInSec - data[v]["ttl"]
-            print(currentTimeInSec)
-            if (isExpired <=0 ):
-                l.append(v)
+            ttl = data[v]["ttl"]
+            if(ttl != -1):
+                currentTimeInSec = int(round(time.time()))
+                isExpired = data[v]["ttl"] - currentTimeInSec
+                print(isExpired)
+                if (isExpired <=0 ):
+                    l.append(v)
 
         for i in range(0, len(l)):
             del data[l[i]]
